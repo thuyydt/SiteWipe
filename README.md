@@ -40,8 +40,8 @@ Use a normal `http://` or `https://` website tab to test purge and inspect featu
 ## Quick start
 
 ```bash
-git clone https://github.com/thuyydt/SiteSwipe.git
-cd SiteSwipe
+git clone https://github.com/thuyydt/SiteWipe.git
+cd SiteWipe
 npm install
 npm run dev
 ```

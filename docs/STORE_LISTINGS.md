@@ -86,8 +86,8 @@ PRIVACY
 • No analytics, no telemetry, no remote servers
 • Actions are scoped to the active tab’s origin
 
-User guide: https://thuyydt.github.io/SiteSwipe/guide.html
-Privacy policy: https://thuyydt.github.io/SiteSwipe/privacy.html
+User guide: https://thuyydt.github.io/SiteWipe/guide.html
+Privacy policy: https://thuyydt.github.io/SiteWipe/privacy.html
 Support: thuydtshop@gmail.com
 ```
 
@@ -210,11 +210,11 @@ Privacy
 
 Links
 
-Homepage: https://thuyydt.github.io/SiteSwipe/
-Guide: https://thuyydt.github.io/SiteSwipe/guide.html
-Privacy: https://thuyydt.github.io/SiteSwipe/privacy.html
+Homepage: https://thuyydt.github.io/SiteWipe/
+Guide: https://thuyydt.github.io/SiteWipe/guide.html
+Privacy: https://thuyydt.github.io/SiteWipe/privacy.html
 Support: thuydtshop@gmail.com
-Source: https://github.com/thuyydt/SiteSwipe
+Source: https://github.com/thuyydt/SiteWipe
 ```
 
 **Categories**
@@ -241,7 +241,7 @@ Matches `browser_specific_settings.gecko.data_collection_permissions.required: [
 **Privacy policy URL**
 
 ```text
-https://thuyydt.github.io/SiteSwipe/privacy.html
+https://thuyydt.github.io/SiteWipe/privacy.html
 ```
 
 **Support email**
@@ -253,7 +253,7 @@ thuydtshop@gmail.com
 **Homepage**
 
 ```text
-https://thuyydt.github.io/SiteSwipe/
+https://thuyydt.github.io/SiteWipe/
 ```
 
 ### Screenshots
