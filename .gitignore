@@ -1,0 +1,7 @@
+node_modules/
+dist/
+dist-firefox/
+release/
+_docs/
+.DS_Store
+*.local

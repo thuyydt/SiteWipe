@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Sitewipe — clear, inspect, snapshot, and share per-origin browser state. Extension for Chrome, Firefox, and Safari (macOS)."
+    />
+    <title>Sitewipe — Mini DevTools for site storage</title>
+    <link rel="icon" type="image/png" href="./icons/extension_icon32.png" />
+    <link rel="stylesheet" href="./site.css" />
+    <!-- TODO: Set Chrome Web Store listing URL on the Chrome CTA below before publishing. -->
+    <!-- TODO: If AMO uses a different slug, update the Firefox addons.mozilla.org URL. -->
+    <!-- Safari download expects GitHub Release asset: SitewipeHost-macos.zip -->
+    <!-- GitHub Pages: enable Settings → Pages → Build from branch → /docs folder. -->
+  </head>
+  <body>
+    <header class="top">
+      <div class="inner">
+        <h1>
+          <a class="logo" href="./index.html">Sitewipe</a>
+          <span class="badge">v2.0.1</span>
+        </h1>
+        <nav>
+          <a href="./index.html" aria-current="page">Home</a>
+          <a href="./guide.html">Guide</a>
+          <a href="./privacy.html">Privacy</a>
+          <a href="https://github.com/thuyydt/SiteSwipe">GitHub</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="page-main">
+      <section class="hero">
+        <div class="hero-text">
+          <h2>Pure state, one swipe.</h2>
+          <p class="lead">
+            Clear, inspect, snapshot, and share per-origin browser state—without wiping your whole profile
+            or forcing a logout. Built for developers and QA on <strong>Chrome</strong>,
+            <strong>Firefox</strong>, and <strong>Safari</strong> (macOS).
+          </p>
+          <ul class="taglines-alt">
+            <li><strong>SiteSwipe:</strong> The dev’s time machine for site data.</li>
+            <li><strong>SiteSwipe:</strong> Clean. Edit. Restore.</li>
+          </ul>
+          <div class="hero-actions">
+            <!-- TODO: Replace href with your Chrome Web Store listing URL. -->
+            <a class="btn" href="#">Install on Chrome Web Store</a>
+            <a
+              class="btn secondary"
+              href="https://addons.mozilla.org/firefox/addon/sitewipe/"
+              rel="noopener noreferrer"
+              >Install on Firefox</a
+            >
+            <!-- Release asset name must be SitewipeHost-macos.zip on each GitHub Release. -->
+            <a
+              class="btn secondary"
+              href="https://github.com/thuyydt/SiteSwipe/releases/latest/download/SitewipeHost-macos.zip"
+              rel="noopener noreferrer"
+              >Download for Safari (macOS)</a
+            >
+            <a class="btn secondary" href="./guide.html">Read the guide</a>
+          </div>
+        </div>
+        <div class="hero-badge">
+          <img src="./icons/extension_icon128.png" width="128" height="128" alt="Sitewipe extension icon" />
+        </div>
+      </section>
+
+      <section class="block" id="install">
+        <h2>Install</h2>
+        <ul class="install-list">
+          <li>
+            <strong>Chrome</strong> — Chrome Web Store (link above when published).
+          </li>
+          <li>
+            <strong>Firefox</strong> —
+            <a href="https://addons.mozilla.org/firefox/addon/sitewipe/" rel="noopener noreferrer"
+              >Firefox Add-ons (AMO)</a
+            >.
+            <a
+              href="https://github.com/thuyydt/SiteSwipe/blob/main/docs/FIREFOX.md"
+              rel="noopener noreferrer"
+              >Build notes</a
+            >.
+          </li>
+          <li>
+            <strong>Safari (macOS)</strong> —
+            <a
+              href="https://github.com/thuyydt/SiteSwipe/releases/latest/download/SitewipeHost-macos.zip"
+              rel="noopener noreferrer"
+              >Download SitewipeHost-macos.zip</a
+            >
+            from GitHub Releases (host app + extension). Enable the extension in Safari Settings after install.
+            <a
+              href="https://github.com/thuyydt/SiteSwipe/blob/main/docs/SAFARI.md"
+              rel="noopener noreferrer"
+              >Build notes</a
+            >.
+          </li>
+        </ul>
+        <p class="install-foot">
+          All release artifacts:
+          <a href="https://github.com/thuyydt/SiteSwipe/releases" rel="noopener noreferrer">GitHub Releases</a
+          >.
+        </p>
+      </section>
+
+      <section class="block">
+        <h2>Why Sitewipe</h2>
+        <p style="margin: 0 0 16px; color: var(--muted); max-width: 72ch">
+          Instead of digging through DevTools or nuking all browsing data, Sitewipe gives you a focused popup
+          to manage cookies, storage, IndexedDB, cache, and service workers for the <strong>current site
+          only</strong>—with whitelists, dry-run previews, and snapshots you can share.
+        </p>
+        <div class="feature-grid">
+          <div class="feature-card">
+            <h3>Smart selective clear</h3>
+            <ul>
+              <li>Purge cookies, localStorage, sessionStorage, IndexedDB, cache, and service workers per origin.</li>
+              <li>Whitelist cookie names and storage keys to keep sessions while sweeping junk.</li>
+              <li>Impact preview shows what would be deleted before you confirm.</li>
+            </ul>
+          </div>
+          <div class="feature-card">
+            <h3>Snapshots</h3>
+            <ul>
+              <li>Save and restore cookies + storages for one origin.</li>
+              <li>Optional auto-snapshots when storage or cookies change.</li>
+              <li>Compare two snapshots or snapshot vs live tab.</li>
+            </ul>
+          </div>
+          <div class="feature-card">
+            <h3>Inspect &amp; edit</h3>
+            <ul>
+              <li>Inline CRUD for localStorage, sessionStorage, and cookies.</li>
+              <li>Service workers, Cache Storage, and IndexedDB overview.</li>
+            </ul>
+          </div>
+          <div class="feature-card">
+            <h3>Environment injection</h3>
+            <ul>
+              <li>Export Mock JSON or Base64 snapshot strings for teammates.</li>
+              <li>Inject a captured environment into another tab or machine.</li>
+            </ul>
+          </div>
+          <div class="feature-card">
+            <h3>Purge recipes</h3>
+            <ul>
+              <li>Save toggle + whitelist presets and apply them when hostnames match.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="privacy-strip">
+        <h2>Privacy &amp; security by design</h2>
+        <p>
+          100% local: snapshots and profiles stay in <code>chrome.storage.local</code>. No analytics, no remote
+          servers. Actions are scoped to the active origin.
+          <a href="./privacy.html">Privacy policy →</a>
+        </p>
+      </section>
+
+      <section class="block" id="screenshots">
+        <h2>Screenshots</h2>
+        <div class="gallery">
+          <figure>
+            <img src="./demo-img/1.png" alt="Sitewipe Purge tab — selective clear and counts" loading="lazy" />
+            <figcaption>Purge tab — live counts and selective clear.</figcaption>
+          </figure>
+          <figure>
+            <img src="./demo-img/2.png" alt="Sitewipe Inspect tab — storage and cookies" loading="lazy" />
+            <figcaption>Inspect — edit storage and cookies in one place.</figcaption>
+          </figure>
+          <figure>
+            <img src="./demo-img/3.png" alt="Sitewipe Snapshots — capture and restore" loading="lazy" />
+            <figcaption>Snapshots — capture, restore, and share state.</figcaption>
+          </figure>
+          <figure>
+            <img src="./demo-img/4.png" alt="Sitewipe compare snapshots or vs live" loading="lazy" />
+            <figcaption>Compare — diff snapshots or snapshot vs live.</figcaption>
+          </figure>
+          <figure>
+            <img src="./demo-img/5.png" alt="Sitewipe profiles and advanced options" loading="lazy" />
+            <figcaption>Recipes &amp; advanced flows — presets and environment tools.</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="block">
+        <h2>Who it’s for</h2>
+        <div class="feature-grid">
+          <div class="feature-card">
+            <h3>Developers</h3>
+            <p>Debug auth and cache issues, tame service workers, and reset one origin cleanly.</p>
+          </div>
+          <div class="feature-card">
+            <h3>QA &amp; testers</h3>
+            <p>Snapshot complex flows and restore them in seconds between runs.</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="bottom">
+      <p>
+        Sitewipe v2.0.1 —
+        <a href="./guide.html">User guide</a>
+        ·
+        <a href="./privacy.html">Privacy</a>
+        ·
+        <a href="https://github.com/thuyydt/SiteSwipe">Source</a>
+      </p>
+    </footer>
+  </body>
+</html>

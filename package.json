@@ -1,0 +1,36 @@
+{
+  "name": "sitewipe",
+  "version": "2.0.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc --noEmit && vite build",
+    "build:firefox": "vue-tsc --noEmit && vite build --config vite.config.firefox.ts && node scripts/patch-firefox-manifest.mjs",
+    "lint:firefox": "web-ext lint --source-dir dist-firefox",
+    "package:chrome": "bash scripts/package-chrome-store.sh",
+    "package:firefox": "bash scripts/package-firefox-store.sh",
+    "package:store": "npm run package:chrome",
+    "package": "npm run package:chrome && npm run package:firefox",
+    "safari:convert": "bash scripts/convert-safari-extension.sh",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "lucide-vue-next": "^0.468.0",
+    "vue": "^3.5.13",
+    "webextension-polyfill": "^0.12.0"
+  },
+  "devDependencies": {
+    "@crxjs/vite-plugin": "^2.0.0-beta.28",
+    "@types/chrome": "^0.0.287",
+    "@types/webextension-polyfill": "^0.12.5",
+    "@vitejs/plugin-vue": "^5.2.1",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^3.4.17",
+    "typescript": "~5.7.2",
+    "vite": "^5.4.11",
+    "vue-tsc": "^2.1.10",
+    "web-ext": "^10.1.0"
+  }
+}

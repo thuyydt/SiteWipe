@@ -1,0 +1,38 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Fixed width: Firefox recomputes popup width per visible tab when using v-show; Chrome stays stable. */
+:root {
+  --sitewipe-popup-width: 380px;
+}
+
+html {
+  margin: 0;
+  width: var(--sitewipe-popup-width);
+  min-width: var(--sitewipe-popup-width);
+  max-width: var(--sitewipe-popup-width);
+  overflow-x: hidden;
+}
+
+body {
+  margin: 0;
+  width: var(--sitewipe-popup-width);
+  min-width: var(--sitewipe-popup-width);
+  max-width: var(--sitewipe-popup-width);
+  overflow-x: hidden;
+  font-family:
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    sans-serif;
+}
+
+#app {
+  margin: 0;
+  width: 100%;
+  min-width: 0;
+  overflow-x: hidden;
+}

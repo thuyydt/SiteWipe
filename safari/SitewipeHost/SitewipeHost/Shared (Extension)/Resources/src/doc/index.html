@@ -1,0 +1,697 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sitewipe — User Guide</title>
+    <link rel="icon" type="image/png" href="../../icons/extension_icon32.png" />
+    <style>
+      :root {
+        color-scheme: light dark;
+        --bg: #fafaf9;
+        --surface: #ffffff;
+        --surface-2: #f5f5f4;
+        --border: #e7e5e4;
+        --text: #1c1917;
+        --muted: #57534e;
+        --accent: #ea580c;
+        --accent-soft: #fff7ed;
+        --code-bg: #f5f5f4;
+        --warn-bg: #fffbeb;
+        --warn-text: #78350f;
+        --warn-border: #fde68a;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #0c0a09;
+          --surface: #1c1917;
+          --surface-2: #292524;
+          --border: #292524;
+          --text: #f5f5f4;
+          --muted: #a8a29e;
+          --accent: #fb923c;
+          --accent-soft: rgba(251, 146, 60, 0.12);
+          --code-bg: #1c1917;
+          --warn-bg: rgba(120, 53, 15, 0.25);
+          --warn-text: #fde68a;
+          --warn-border: rgba(253, 230, 138, 0.35);
+        }
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        background: var(--bg);
+        color: var(--text);
+        font-family:
+          ui-sans-serif,
+          system-ui,
+          -apple-system,
+          'Segoe UI',
+          Roboto,
+          'Helvetica Neue',
+          Arial,
+          sans-serif;
+        font-size: 15px;
+        line-height: 1.55;
+      }
+      a {
+        color: var(--accent);
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      header.top {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        background: color-mix(in srgb, var(--bg) 85%, transparent);
+        backdrop-filter: blur(8px);
+        border-bottom: 1px solid var(--border);
+      }
+      header.top .inner {
+        max-width: 980px;
+        margin: 0 auto;
+        padding: 14px 24px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+      }
+      header.top h1 {
+        margin: 0;
+        font-size: 17px;
+        font-weight: 600;
+        letter-spacing: -0.01em;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .badge {
+        display: inline-block;
+        padding: 2px 8px;
+        font-size: 11px;
+        font-weight: 600;
+        background: var(--accent-soft);
+        color: var(--accent);
+        border-radius: 999px;
+        letter-spacing: 0.02em;
+      }
+      header.top nav {
+        display: flex;
+        gap: 14px;
+        flex-wrap: wrap;
+        font-size: 13px;
+        color: var(--muted);
+      }
+      header.top nav a {
+        color: var(--muted);
+      }
+      header.top nav a:hover {
+        color: var(--text);
+      }
+      main {
+        max-width: 980px;
+        margin: 0 auto;
+        padding: 28px 24px 80px;
+        display: grid;
+        grid-template-columns: 220px 1fr;
+        gap: 36px;
+      }
+      @media (max-width: 760px) {
+        main {
+          grid-template-columns: 1fr;
+        }
+        aside.toc {
+          position: static;
+          border-right: 0;
+          border-bottom: 1px solid var(--border);
+          padding-bottom: 16px;
+        }
+      }
+      aside.toc {
+        position: sticky;
+        top: 72px;
+        align-self: start;
+        font-size: 13px;
+      }
+      aside.toc h2 {
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--muted);
+        margin: 0 0 10px;
+      }
+      aside.toc ol {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+      aside.toc a {
+        color: var(--text);
+        opacity: 0.78;
+      }
+      aside.toc a:hover {
+        opacity: 1;
+        color: var(--accent);
+      }
+      article > section {
+        margin-bottom: 36px;
+        scroll-margin-top: 80px;
+      }
+      article h2 {
+        margin: 0 0 6px;
+        font-size: 22px;
+        font-weight: 600;
+        letter-spacing: -0.01em;
+      }
+      article h2 .anchor {
+        opacity: 0;
+        margin-left: 8px;
+        font-size: 14px;
+        color: var(--muted);
+        transition: opacity 0.15s;
+      }
+      article h2:hover .anchor {
+        opacity: 1;
+      }
+      article p,
+      article li {
+        color: var(--text);
+      }
+      article p.lead {
+        color: var(--muted);
+        margin: 4px 0 16px;
+      }
+      article h3 {
+        font-size: 14px;
+        font-weight: 600;
+        margin: 18px 0 6px;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: var(--muted);
+      }
+      article ul,
+      article ol {
+        padding-left: 22px;
+        margin: 6px 0 12px;
+      }
+      article li + li {
+        margin-top: 4px;
+      }
+      kbd,
+      code {
+        font-family:
+          ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
+          'Courier New', monospace;
+        font-size: 0.86em;
+      }
+      code {
+        background: var(--code-bg);
+        padding: 1px 6px;
+        border-radius: 4px;
+        border: 1px solid var(--border);
+      }
+      pre {
+        background: var(--code-bg);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 12px 14px;
+        overflow-x: auto;
+        font-size: 12.5px;
+        line-height: 1.5;
+      }
+      pre code {
+        background: transparent;
+        border: 0;
+        padding: 0;
+      }
+      .pill {
+        display: inline-block;
+        padding: 1px 8px;
+        font-size: 11px;
+        font-weight: 600;
+        border-radius: 6px;
+        border: 1px solid var(--border);
+        background: var(--surface-2);
+        color: var(--text);
+        margin-right: 4px;
+      }
+      .ui {
+        font-weight: 600;
+        background: var(--accent-soft);
+        color: var(--accent);
+        padding: 1px 6px;
+        border-radius: 4px;
+      }
+      .callout {
+        border-left: 3px solid var(--accent);
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-left-color: var(--accent);
+        padding: 10px 14px;
+        border-radius: 0 8px 8px 0;
+        margin: 12px 0;
+        font-size: 13.5px;
+        color: var(--muted);
+      }
+      .callout strong {
+        color: var(--text);
+      }
+      .warn {
+        background: var(--warn-bg);
+        border: 1px solid var(--warn-border);
+        color: var(--warn-text);
+        padding: 10px 14px;
+        border-radius: 8px;
+        font-size: 13.5px;
+        margin: 12px 0;
+      }
+      table.controls {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 13px;
+        margin: 8px 0 12px;
+      }
+      table.controls th,
+      table.controls td {
+        text-align: left;
+        padding: 8px 10px;
+        border-bottom: 1px solid var(--border);
+        vertical-align: top;
+      }
+      table.controls th {
+        font-weight: 600;
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: var(--muted);
+      }
+      footer.bottom {
+        max-width: 980px;
+        margin: 0 auto;
+        padding: 24px 24px 48px;
+        color: var(--muted);
+        font-size: 12.5px;
+        border-top: 1px solid var(--border);
+      }
+    </style>
+  </head>
+  <body>
+    <header class="top">
+      <div class="inner">
+        <h1>
+          Sitewipe
+          <span class="badge">v2.0.1</span>
+        </h1>
+        <nav>
+          <a href="#getting-started">Start</a>
+          <a href="#purge">Purge</a>
+          <a href="#snapshots">Snapshots</a>
+          <a href="#env-injection">Env</a>
+          <a href="#changelog">Changelog</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <aside class="toc">
+        <h2>Contents</h2>
+        <ol>
+          <li><a href="#getting-started">1. Getting started</a></li>
+          <li><a href="#purge">2. Purge tab</a></li>
+          <li><a href="#whitelist">3. Smart selective clear</a></li>
+          <li><a href="#impact-preview">4. Impact preview</a></li>
+          <li><a href="#inspect">5. Inspect tab</a></li>
+          <li><a href="#profiles">6. Purge recipes</a></li>
+          <li><a href="#snapshots">7. Snapshots</a></li>
+          <li><a href="#auto-snapshots">8. Auto snapshots</a></li>
+          <li><a href="#compare">9. Compare snapshots</a></li>
+          <li><a href="#env-injection">10. Environment injection</a></li>
+          <li><a href="#permissions">11. Permissions</a></li>
+          <li><a href="#changelog">12. Changelog</a></li>
+        </ol>
+      </aside>
+
+      <article>
+        <section id="getting-started">
+          <h2>1. Getting started <a class="anchor" href="#getting-started">#</a></h2>
+          <p class="lead">
+            Sitewipe is a DevTools companion that clears, inspects, snapshots, and shares
+            per-origin browser state without forcing you to log out.
+          </p>
+          <h3>Open the popup</h3>
+          <ol>
+            <li>Pin the Sitewipe icon to the Chrome toolbar.</li>
+            <li>Open the site you want to work with, then click the icon.</li>
+            <li>
+              The header shows the current site’s hostname. If it reads
+              <em>Sitewipe cannot run on this page (restricted URL)</em>, switch to a regular
+              <code>http://</code> or <code>https://</code> tab — Chrome blocks extensions on
+              <code>chrome://</code>, the Web Store, and similar pages.
+            </li>
+          </ol>
+          <h3>Layout</h3>
+          <ul>
+            <li>
+              Top header: site name, <span class="ui">User guide</span> button (opens this page in a
+              new tab via <code>chrome.runtime.getURL('src/doc/index.html')</code>),
+              <span class="ui">Advanced</span> panel.
+            </li>
+            <li>Tabs: <span class="pill">Purge</span> <span class="pill">Inspect</span> <span class="pill">Profiles</span> <span class="pill">Snapshots</span>.</li>
+          </ul>
+        </section>
+
+        <section id="purge">
+          <h2>2. Purge tab <a class="anchor" href="#purge">#</a></h2>
+          <p class="lead">Clear selected data categories for the active origin in one click.</p>
+          <h3>Steps</h3>
+          <ol>
+            <li>Read the live counts (<em>cookies / localStorage / sessionStorage</em>) at the top. Use <span class="ui">Refresh counts</span> after external changes.</li>
+            <li>Tick the data types to remove.</li>
+            <li>Optionally fill in whitelists (see <a href="#whitelist">section 3</a>).</li>
+            <li>Click <span class="ui">Preview &amp; clear</span> — Sitewipe estimates the impact first; nothing is deleted yet.</li>
+            <li>Confirm <span class="ui">Proceed to clear</span> in the dialog to execute.</li>
+          </ol>
+          <h3>What each checkbox removes</h3>
+          <table class="controls">
+            <thead>
+              <tr><th>Toggle</th><th>Effect</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Cookies</td><td>Removes all cookies for the origin via <code>chrome.browsingData</code>, or selectively if a whitelist is set.</td></tr>
+              <tr><td>Preserve session cookies</td><td>Skips cookies marked <code>session</code> during selective sweep — useful to stay logged in while clearing analytics/tracking cookies.</td></tr>
+              <tr><td>LocalStorage</td><td>Wipes <code>localStorage</code> for the origin; whitelisted keys are re-merged after.</td></tr>
+              <tr><td>SessionStorage</td><td>Clears the page’s <code>sessionStorage</code> in the MAIN world.</td></tr>
+              <tr><td>IndexedDB</td><td>Drops all IDB databases for the origin.</td></tr>
+              <tr><td>Cache storage</td><td>Empties the Service Worker Cache Storage.</td></tr>
+              <tr><td>Service workers</td><td>Unregisters every SW scope plus clears its storage.</td></tr>
+            </tbody>
+          </table>
+          <div class="warn">
+            Clearing cookies + localStorage usually logs you out. Use whitelists or the dry-run
+            preview if you’re unsure.
+          </div>
+        </section>
+
+        <section id="whitelist">
+          <h2>3. Smart selective clear <a class="anchor" href="#whitelist">#</a></h2>
+          <p class="lead">
+            Keep auth state and important keys while everything else is wiped.
+          </p>
+          <h3>Where to set</h3>
+          <ul>
+            <li>Under the checkboxes, open the <span class="ui">Keep (whitelist)</span> block.</li>
+            <li>Enter <strong>Cookie names</strong> (one per line or comma-separated).</li>
+            <li>Enter <strong>localStorage keys</strong> the same way.</li>
+          </ul>
+          <h3>How it works</h3>
+          <ul>
+            <li><strong>Cookies</strong>: when a whitelist is set or <em>Preserve session cookies</em> is on, Sitewipe loops cookies one by one and skips matching names instead of bulk-deleting.</li>
+            <li><strong>localStorage</strong>: Sitewipe reads the matched keys, lets <code>chrome.browsingData</code> wipe the origin, then writes the saved values back. This works even when the page hasn’t been opened.</li>
+            <li>Whitelists are saved per <a href="#profiles">recipe</a> so different sites can have different rules.</li>
+          </ul>
+          <div class="callout">
+            <strong>Tip:</strong> common names to whitelist —
+            <code>session_id</code>, <code>auth_token</code>, <code>refresh_token</code>,
+            <code>persist:root</code>, <code>feature_flags</code>.
+          </div>
+        </section>
+
+        <section id="impact-preview">
+          <h2>4. Impact preview (dry run) <a class="anchor" href="#impact-preview">#</a></h2>
+          <p class="lead">A safety net before any destructive action.</p>
+          <p>
+            <span class="ui">Preview &amp; clear</span> always opens a <strong>Purge impact</strong> dialog
+            describing what <em>would</em> be removed. Nothing is touched until you press
+            <span class="ui">Proceed to clear</span>.
+          </p>
+          <h3>What the dialog tells you</h3>
+          <ul>
+            <li><strong>Origin</strong> — the scope of the action.</li>
+            <li><strong>Targets</strong> — checked data types in plain language.</li>
+            <li><strong>Cookies affected</strong> — estimated count and how many are kept by name.</li>
+            <li><strong>localStorage keys removed</strong> — estimated count and how many will be restored.</li>
+            <li><strong>sessionStorage keys cleared</strong> — count, when sessionStorage is selected.</li>
+            <li>An amber <strong>“may log you out”</strong> warning when bulk cookies or localStorage will be wiped without a whitelist.</li>
+          </ul>
+          <div class="callout">
+            Press <kbd>Esc</kbd> or <span class="ui">Back</span> to abort. The Purge tab keeps your
+            current options so you can adjust and retry.
+          </div>
+        </section>
+
+        <section id="inspect">
+          <h2>5. Inspect tab <a class="anchor" href="#inspect">#</a></h2>
+          <p class="lead">A focused replacement for DevTools’ Application panel.</p>
+          <ul>
+            <li><strong>Storage table</strong> — view, add, edit, and delete <code>localStorage</code> and <code>sessionStorage</code> entries inline.</li>
+            <li><strong>Cookies</strong> — full CRUD on the active origin’s cookies (name, value, domain, path, secure, httpOnly, sameSite, session, partition key).</li>
+            <li><strong>Service workers</strong> — list registrations and unregister a specific scope.</li>
+            <li><strong>Cache storage</strong> — overview of cache names with sample URLs.</li>
+            <li><strong>IndexedDB</strong> — list databases and stores, sample up to 45 rows per store for quick inspection.</li>
+          </ul>
+          <div class="callout">
+            Cookie partition keys and SameSite policies are preserved on edit — useful when
+            debugging third-party / partitioned cookies (CHIPS).
+          </div>
+        </section>
+
+        <section id="profiles">
+          <h2>6. Purge recipes (Profiles tab) <a class="anchor" href="#profiles">#</a></h2>
+          <p class="lead">Save your favourite combinations of toggles + whitelists and reuse them.</p>
+          <h3>Save a preset</h3>
+          <ol>
+            <li>Open the <span class="pill">Profiles</span> tab.</li>
+            <li>Name the preset (e.g. <em>Wipe cache + SW</em>).</li>
+            <li>Optionally add one or more hostnames in <span class="ui">Suggest on hostnames</span> (e.g. <code>app.example.com, localhost</code>).</li>
+            <li>Tick the desired toggles, fill in the optional whitelist names.</li>
+            <li>Click <span class="ui">Save preset</span>.</li>
+          </ol>
+          <h3>Apply</h3>
+          <ul>
+            <li>When the current tab’s hostname matches a preset, a <strong>“Matches this site”</strong> band appears at the top of the Profiles tab.</li>
+            <li>Click <span class="ui">Apply</span> on any preset — Sitewipe copies its options and whitelists into the Purge tab.</li>
+            <li>Adjust if needed and run <span class="ui">Preview &amp; clear</span>.</li>
+          </ul>
+        </section>
+
+        <section id="snapshots">
+          <h2>7. Snapshots <a class="anchor" href="#snapshots">#</a></h2>
+          <p class="lead">Save and restore the full per-origin state — cookies + localStorage + sessionStorage.</p>
+          <p>
+            The <span class="pill">Purge</span> tab refreshes its summary counts when you open the popup; use
+            <span class="ui">Clear all snapshots</span> here to remove every saved snapshot (all origins).
+          </p>
+          <h3>Capture</h3>
+          <ol>
+            <li>Open the <span class="pill">Snapshots</span> tab.</li>
+            <li>(Optional) name the snapshot.</li>
+            <li>Click <span class="ui">+ New</span>. The list shows time and approximate size.</li>
+          </ol>
+          <h3>Restore</h3>
+          <ol>
+            <li>Click the restore icon on any card.</li>
+            <li>A <strong>Restore preview</strong> diff shows storage values that will change.</li>
+            <li>Confirm to reload the tab into the saved state.</li>
+          </ol>
+          <h3>Share</h3>
+          <ul>
+            <li><span class="ui">Export JSON</span> — saves a portable snapshot file.</li>
+            <li><span class="ui">Copy snapshot string (Base64)</span> — paste in chat or a ticket.</li>
+            <li>Import a Base64 string via the <span class="ui">Advanced</span> panel.</li>
+          </ul>
+        </section>
+
+        <section id="auto-snapshots">
+          <h2>8. Auto snapshots (Event-triggered) <a class="anchor" href="#auto-snapshots">#</a></h2>
+          <p class="lead">
+            Like Git for browser data — let Sitewipe capture each time storage changes so you can
+            roll back.
+          </p>
+          <h3>Enable</h3>
+          <ol>
+            <li>Open the <span class="pill">Snapshots</span> tab on the target site.</li>
+            <li>
+              Tick the checkbox labelled
+              <span class="ui">Auto-save snapshot when <em>cookies / localStorage / sessionStorage</em> change (per-origin, debounced; captures a baseline when you enable it)</span>.
+            </li>
+            <li>
+              A baseline <code>Auto · baseline · HH:MM:SS</code> appears immediately so you have a
+              reference point.
+            </li>
+          </ol>
+          <h3>Troubleshooting</h3>
+          <ul>
+            <li>
+              After installing a new build, open <code>chrome://extensions</code> and reload
+              Sitewipe so the updated content scripts are re-registered for the page.
+            </li>
+            <li>
+              The watch is scoped to the exact origin (scheme + host + port). Toggling it on
+              <code>https://app.example.com</code> will not snapshot
+              <code>https://www.example.com</code>; enable it on each origin you care about.
+            </li>
+            <li>
+              Rapid logout/login bursts may produce only one auto entry due to the
+              <strong>15 s per-origin</strong> throttle. Use the
+              <span class="ui">+ New</span> button to force an extra capture when needed.
+            </li>
+            <li>
+              If nothing appears on storage writes, confirm the page is not a restricted URL
+              (<code>chrome://</code>, Web Store, etc.) and that the popup header doesn’t show the
+              restricted-URL warning.
+            </li>
+          </ul>
+          <h3>What gets captured</h3>
+          <ul>
+            <li>
+              <strong>Storage writes</strong> — a MAIN-world content script installed at
+              <code>document_start</code> patches
+              <code>Storage.prototype.setItem</code>/<code>removeItem</code>/<code>clear</code>, so
+              both <code>localStorage.setItem(...)</code> and
+              <code>Storage.prototype.setItem.call(...)</code> are intercepted.
+            </li>
+            <li>
+              <strong>Cookie changes</strong> — the service worker subscribes to
+              <code>chrome.cookies.onChanged</code> for each watched origin, so logout/login flows
+              that only touch cookies (including httpOnly session cookies) still trigger an
+              <code>Auto · cookies · HH:MM:SS</code> capture.
+            </li>
+          </ul>
+          <h3>How it works</h3>
+          <ul>
+            <li>An ISOLATED content script bridges MAIN-world storage events to the service worker,
+              forwarding only when the page’s origin is in your watch list.</li>
+            <li>Captures are <strong>debounced ~700 ms</strong> per origin and rate-limited to
+              <strong>one per 15 s per origin</strong> across both sources.</li>
+            <li>If no tab is open with that origin during a cookie event, Sitewipe falls back to a
+              cookies-only snapshot using <code>chrome.cookies.getAll</code>.</li>
+            <li>Toggling the watch on also retro-injects the storage patch into already-open tabs
+              of that origin — no reload required.</li>
+            <li>The store keeps the most recent <strong>150</strong> entries.</li>
+          </ul>
+          <div class="callout">
+            Disable the watch when you no longer need it; auto entries can accumulate during heavy
+            test flows.
+          </div>
+        </section>
+
+        <section id="compare">
+          <h2>9. Compare snapshots <a class="anchor" href="#compare">#</a></h2>
+          <p class="lead">Pinpoint what data changed between two captures, or vs. the live tab.</p>
+          <h3>Pick targets</h3>
+          <ol>
+            <li>In the Snapshots tab, use the two selects under <span class="ui">Compare</span>.</li>
+            <li>Choose either:
+              <ul>
+                <li><span class="ui">Snapshot vs snapshot</span></li>
+                <li><span class="ui">Snapshot vs live</span> (compares the first select against the current tab)</li>
+              </ul>
+            </li>
+          </ol>
+          <h3>Reading the diff</h3>
+          <ul>
+            <li><strong>Area</strong> — <code>cookie</code>, <code>localStorage</code>, or <code>sessionStorage</code>.</li>
+            <li><strong>Change</strong> — <code>added</code>, <code>removed</code>, or <code>changed</code>.</li>
+            <li><strong>Key</strong> — cookie name (with domain/path detail) or storage key.</li>
+            <li><strong>Values</strong> — short preview of <code>left → right</code>; hover the row to see full values.</li>
+          </ul>
+        </section>
+
+        <section id="env-injection">
+          <h2>10. Environment injection <a class="anchor" href="#env-injection">#</a></h2>
+          <p class="lead">
+            “Works on my machine? Send me your machine.” Share a complete reproducible state with a
+            teammate.
+          </p>
+          <h3>Capture &amp; share</h3>
+          <ul>
+            <li>Open the <span class="ui">Advanced</span> panel (top-right of the popup).</li>
+            <li><span class="ui">Copy as Mock JSON</span> — copies a portable JSON describing cookies and storages.</li>
+            <li><span class="ui">Copy as CLI script</span> — JavaScript you can paste in DevTools to recreate the state manually.</li>
+            <li><span class="ui">Copy snapshot string (Base64)</span> from a snapshot card for a single one-liner share.</li>
+          </ul>
+          <h3>Apply on another machine</h3>
+          <ol>
+            <li>Open the same site, then the <span class="ui">Advanced</span> panel.</li>
+            <li>Paste into <span class="ui">Inject environment (Mock JSON)</span> and click <span class="ui">Apply to this tab</span>. Sitewipe wipes the origin and writes the payload back, then reloads.</li>
+            <li>Or paste a Base64 string into <span class="ui">Import snapshot string (Base64)</span> to add it to your Snapshots list before restoring.</li>
+          </ol>
+          <h3>Kill &amp; reload</h3>
+          <p>
+            <span class="ui">Kill &amp; Reload</span> is the nuclear option: cookies, storages,
+            IndexedDB, caches and service workers are all removed for the origin, then the tab is
+            hard-reloaded. Use it when a stuck Service Worker or cache is keeping a broken state
+            alive.
+          </p>
+        </section>
+
+        <section id="permissions">
+          <h2>11. Permissions <a class="anchor" href="#permissions">#</a></h2>
+          <p class="lead">Why Sitewipe asks for what it asks for.</p>
+          <table class="controls">
+            <thead><tr><th>Permission</th><th>Reason</th></tr></thead>
+            <tbody>
+              <tr><td><code>storage</code></td><td>Save profiles, snapshots, and auto-watch settings locally.</td></tr>
+              <tr><td><code>tabs</code></td><td>Read the active tab URL and title to scope actions.</td></tr>
+              <tr><td><code>scripting</code></td><td>Probe and modify <code>localStorage</code>/<code>sessionStorage</code> in the page world.</td></tr>
+              <tr><td><code>cookies</code></td><td>Read, set, and remove cookies for the active origin.</td></tr>
+              <tr><td><code>browsingData</code></td><td>Bulk-clear cookies, IndexedDB, cache storage, service workers.</td></tr>
+              <tr><td><code>webNavigation</code></td><td>Currently declared in the manifest but unused by the background logic. Auto-snapshot installs its hook through two <code>content_scripts</code> at <code>document_start</code> and listens to <code>chrome.cookies.onChanged</code>; this row may be removed in a future cleanup.</td></tr>
+              <tr><td><code>host_permissions</code> (<code>http</code>/<code>https</code>)</td><td>Required for cookies and scripting on the active origin.</td></tr>
+            </tbody>
+          </table>
+          <p>
+            Sitewipe will refuse to act on <code>chrome://</code>, the Chrome Web Store, and other
+            restricted URLs — the popup shows a warning in those cases.
+          </p>
+        </section>
+
+        <section id="changelog">
+          <h2>12. Changelog <a class="anchor" href="#changelog">#</a></h2>
+          <h3>v2.0.1</h3>
+          <ul>
+            <li>Smart selective clear (cookie + localStorage whitelists).</li>
+            <li>Impact preview dialog before every purge.</li>
+            <li>Purge recipes with hostname suggestions.</li>
+            <li>Snapshot diff &amp; compare (snapshot↔snapshot and snapshot↔live).</li>
+            <li>Event-triggered auto snapshots (debounced, per-origin opt-in).</li>
+            <li>
+              Auto snapshots now react to <code>chrome.cookies.onChanged</code> as well, so cookie-only
+              login/logout flows (including httpOnly sessions) produce an
+              <code>Auto · cookies · HH:MM:SS</code> entry.
+            </li>
+            <li>
+              Storage interception moved to <code>Storage.prototype</code> and runs from a MAIN-world
+              content script at <code>document_start</code>, catching both
+              <code>localStorage.setItem(...)</code> and
+              <code>Storage.prototype.setItem.call(...)</code> patterns before page code runs.
+            </li>
+            <li>
+              Enabling the watch immediately captures a baseline snapshot and retro-injects the
+              storage hook into already-open tabs — no reload needed.
+            </li>
+            <li>
+              Cookies-only fallback: cookie events fire a snapshot even when no tab is open for the
+              origin, by reading <code>chrome.cookies.getAll</code>.
+            </li>
+            <li>Environment injection from Mock JSON via the Advanced panel.</li>
+            <li>This user guide.</li>
+          </ul>
+        </section>
+      </article>
+    </main>
+
+    <footer class="bottom">
+      Sitewipe v2.0.1 — clear, inspect, snapshot, and share per-origin browser state.
+    </footer>
+  </body>
+</html>
