@@ -12,11 +12,11 @@ Copy-paste content for **Chrome Web Store** and **Firefox Add-ons (AMO)**. Versi
 | **Tagline** | Mini DevTools for site storage |
 | **Developer** | thuydtshop |
 | **Support email** | thuydtshop@gmail.com |
-| **Homepage** | https://thuyydt.github.io/SiteSwipe/ |
-| **Privacy policy URL** | https://thuyydt.github.io/SiteSwipe/privacy.html |
-| **User guide** | https://thuyydt.github.io/SiteSwipe/guide.html |
-| **Support / issues** | https://github.com/thuyydt/SiteSwipe/issues |
-| **Source code** | https://github.com/thuyydt/SiteSwipe |
+| **Homepage** | https://thuyydt.github.io/SiteWipe/ |
+| **Privacy policy URL** | https://thuyydt.github.io/SiteWipe/privacy.html |
+| **User guide** | https://thuyydt.github.io/SiteWipe/guide.html |
+| **Support / issues** | https://github.com/thuyydt/SiteWipe/issues |
+| **Source code** | https://github.com/thuyydt/SiteWipe |
 | **License** | MIT ([LICENSE](../LICENSE) in repo) |
 
 ---
